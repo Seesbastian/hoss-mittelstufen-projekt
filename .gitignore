@@ -1,0 +1,6 @@
+
+hcloud-microos-snapshots.pkr.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.env
+terraform.tf.compact
