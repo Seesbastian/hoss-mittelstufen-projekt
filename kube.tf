@@ -4,7 +4,8 @@ locals {
   # If you choose to define it in the shell, this can be left as is.
 
   # Your Hetzner token can be found in your Project > Security > API Token (Read & Write is required).
-  hcloud_token = "LF1G5jfARN00xPupMsf08CIvXQ84KWgbfZgYKFQIGLa66AoqDvrBdnW1piiWOL4L"
+  # Imagine leaking your API Token.
+  #hcloud_token = "LF1G5jfARN00xPupMsf08CIvXQ84KWgbfZgYKFQIGLa66AoqDvrBdnW1piiWOL4L"
 }
 
 module "kube-hetzner" {
@@ -22,7 +23,7 @@ module "kube-hetzner" {
   # source = "github.com/kube-hetzner/terraform-hcloud-kube-hetzner"
   # For normal use, this is the path to the terraform registry
   source = "kube-hetzner/kube-hetzner/hcloud"
-
+  source = .env
   # You can optionally specify a version number
   # version = "1.2.0"
 
