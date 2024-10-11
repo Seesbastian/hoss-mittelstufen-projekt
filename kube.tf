@@ -5,7 +5,7 @@ locals {
 
   # Your Hetzner token can be found in your Project > Security > API Token (Read & Write is required).
   # Imagine leaking your API Token.
-  #hcloud_token = "LF1G5jfARN00xPupMsf08CIvXQ84KWgbfZgYKFQIGLa66AoqDvrBdnW1piiWOL4L"
+  hcloud_token = "xxxx"
 }
 
 module "kube-hetzner" {
@@ -13,7 +13,6 @@ module "kube-hetzner" {
     hcloud = hcloud
   }
   hcloud_token = var.hcloud_token != "" ? var.hcloud_token : local.hcloud_token
-
   # Then fill or edit the below values. Only the first values starting with a * are obligatory; the rest can remain with their default values, or you
   # could adapt them to your needs.
 
@@ -23,7 +22,7 @@ module "kube-hetzner" {
   # source = "github.com/kube-hetzner/terraform-hcloud-kube-hetzner"
   # For normal use, this is the path to the terraform registry
   source = "kube-hetzner/kube-hetzner/hcloud"
-  source = .env
+  
   # You can optionally specify a version number
   # version = "1.2.0"
 
@@ -1055,7 +1054,6 @@ bootstrapPassword: "supermario"
   EOT */
 
 }
-
 provider "hcloud" {
   token = var.hcloud_token != "" ? var.hcloud_token : local.hcloud_token
 }
