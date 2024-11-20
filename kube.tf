@@ -5,7 +5,7 @@ locals {
 
   # Your Hetzner token can be found in your Project > Security > API Token (Read & Write is required).
   # Imagine leaking your API Token.
-  hcloud_token = "xxxx"
+  hcloud_token = var.hcloud_token
 }
 
 module "kube-hetzner" {
@@ -569,7 +569,7 @@ module "kube-hetzner" {
   # in that case, set this to false to immediately delete pods before upgrading.
   # NOTE: Turning this flag off might lead to downtimes of services (which may be acceptable for your use case)
   # NOTE: This flag takes effect only when system_upgrade_use_drain is set to true.
-  # system_upgrade_enable_eviction = false
+  system_upgrade_enable_eviction = false
 
   # The default is "true" (in HA setup it works wonderfully well, with automatic roll-back to the previous snapshot in case of an issue).
   # IMPORTANT! For non-HA clusters i.e. when the number of control-plane nodes is < 3, you have to turn it off.
@@ -657,6 +657,7 @@ module "kube-hetzner" {
   # Please be advised that this setting has no effect on the load balancer when the use_control_plane_lb variable is set to true. This is
   # because firewall rules cannot be applied to load balancers yet.
   # firewall_kube_api_source = null
+  firewall_kube_api_source = ["78.47.228.208/32"] # Hetzner Jump-Host
 
   # Allow SSH access from the specified networks. Default: ["0.0.0.0/0", "::/0"]
   # Allowed values: null (disable SSH rule entirely) or a list of allowed networks with CIDR notation.
@@ -1054,6 +1055,13 @@ bootstrapPassword: "supermario"
   EOT */
 
 }
+
+variable "hcloud_token" {
+  description = "Hetzner API Token"
+  type        = string
+  sensitive   = true
+}
+
 provider "hcloud" {
   token = var.hcloud_token != "" ? var.hcloud_token : local.hcloud_token
 }
@@ -1073,7 +1081,3 @@ output "kubeconfig" {
   sensitive = true
 }
 
-variable "hcloud_token" {
-  sensitive = true
-  default   = ""
-}
