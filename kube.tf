@@ -330,13 +330,13 @@ module "kube-hetzner" {
       labels      = {
         "node.kubernetes.io/role": "peak-workloads"
       }
-      taints      = [
-        {
-         key= "node.kubernetes.io/role"
-         value= "peak-workloads"
-         effect= "NoExecute"
-        }
-      ]
+  #    taints      = [
+  #      {
+  #       key= "node.kubernetes.io/role"
+  #       value= "peak-workloads"
+  #       effect= "NoExecute"
+  #      }
+  #    ]
       # kubelet_args = ["kube-reserved=cpu=250m,memory=1500Mi,ephemeral-storage=1Gi", "system-reserved=cpu=250m,memory=300Mi"]
     }
   ]
