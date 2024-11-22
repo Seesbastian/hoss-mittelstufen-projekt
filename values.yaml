@@ -376,7 +376,7 @@ internalDatabase:
 ## External database configuration
 ##
 externalDatabase:
-  enabled: true
+  enabled: false
 
   ## Supported database engines: mysql or postgresql
   type: mysql
@@ -444,13 +444,13 @@ mariadb:
 ## for more options see https://github.com/bitnami/charts/tree/main/bitnami/postgresql
 ##
 postgresql:
-  enabled: false
+  enabled: true
   global:
     postgresql:
       # global.postgresql.auth overrides postgresql.auth
       auth:
         username: nextcloud
-        password: changeme
+        password: bunkulus
         database: nextcloud
         # Name of existing secret to use for PostgreSQL credentials.
         # auth.postgresPassword, auth.password, and auth.replicationPassword will be ignored and picked up from this secret.
