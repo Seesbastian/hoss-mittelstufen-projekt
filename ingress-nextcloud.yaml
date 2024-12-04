@@ -16,3 +16,7 @@ spec:
                 name: nextcloud
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - msp-nc.schwoepcloud.de
+      secretName: nextcloud-tls
