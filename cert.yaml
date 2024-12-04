@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nextcloud-tls
+  namespace: default
+spec:
+  secretName: nextcloud-tls
+  issuerRef:
+    name: cluster-issuer
+    kind: ClusterIssuer
+  commonName: msp-nc.schwoepcloud.de
+  dnsNames:
+    - msp-nc.schwoepcloud.de
