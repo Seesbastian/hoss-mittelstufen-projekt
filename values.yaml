@@ -91,8 +91,7 @@ nextcloud:
   # If web server is not binding default port, you can define it
   containerPort: 80
   datadir: /var/www/html/data
-  persistence:
-    subPath:
+ 
   # if set, we'll template this list to the NEXTCLOUD_TRUSTED_DOMAINS env var
   trustedDomains: []
   ## SMTP configuration
@@ -313,7 +312,6 @@ nextcloud:
     # Set postgresql initContainer securityContext parameters. For example, you may need to define runAsNonRoot directive
     securityContext: {}
 
-
 nginx:
   ## You need to set an fpm version of the image for nextcloud if you want to use nginx!
   enabled: false
@@ -468,6 +466,7 @@ postgresql:
       # Use an existing Persistent Volume Claim (must be created ahead of time)
       # existingClaim: ""
       # storageClass: ""
+    size: 12Gi
 
 ##
 ## Redis chart configuration
@@ -530,7 +529,7 @@ service:
 ##
 persistence:
   # Nextcloud Data (/var/www/html)
-  enabled: false
+  enabled: true
   annotations: {}
   ## nextcloud data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -539,21 +538,22 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  # storageClass: "-"
+  storageClass: hcloud-volumes
 
+  accessMode: ReadWriteOnce
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
   # existingClaim:
 
-  accessMode: ReadWriteOnce
-  size: 8Gi
+    #accessMode: ReadWriteMany
+  size: 16Gi
 
   ## Use an additional pvc for the data directory rather than a subpath of the default PVC
   ## Useful to store data on a different storageClass (e.g. on slower disks)
   nextcloudData:
     enabled: false
-    subPath:
+    #subPath:
     annotations: {}
     # storageClass: "-"
     # existingClaim:
