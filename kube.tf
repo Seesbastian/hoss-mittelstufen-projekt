@@ -323,7 +323,7 @@ module "kube-hetzner" {
   autoscaler_nodepools = [
     {
       name        = "autoscaled-small"
-      server_type = "cx32"
+      server_type = "cx22"
       location    = "fsn1"
       min_nodes   = 0
       max_nodes   = 5

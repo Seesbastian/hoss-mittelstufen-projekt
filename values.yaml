@@ -24,7 +24,9 @@ replicaCount: 1
 ##
 ingress:
   enabled: false
-  # className: nginx
+    #className: traefik
+    #path: "/"
+    #pathType: Prefix  
   annotations: {}
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
   #  kubernetes.io/tls-acme: "true"
@@ -231,14 +233,14 @@ nextcloud:
   #       'OC\Preview\PDF'
   #     ),
   #   );
-      domains.config.php: |-
-        <?php
-        $CONFIG = array (
-            'trusted_domains' =>
-                   [
-                    'msp-nc.schwoepcloud.de'
-                  ],
-        );
+  #    domains.config.php: |-
+  #      <?php
+  #      $CONFIG = array (
+  #          'trusted_domains' =>
+  #                 [
+  #                  'msp-nc.schwoepcloud.de'
+  #                ],
+  #      );
 
   # Hooks for auto configuration
   # Here you could write small scripts which are placed in `/docker-entrypoint-hooks.d/<hook-name>/helm.sh`
@@ -471,11 +473,10 @@ postgresql:
           replicationPasswordKey: ""
   primary:
     persistence:
-      enabled: false
+      enabled: true
       # Use an existing Persistent Volume Claim (must be created ahead of time)
       # existingClaim: ""
       # storageClass: ""
-    size: 12Gi
 
 ##
 ## Redis chart configuration
